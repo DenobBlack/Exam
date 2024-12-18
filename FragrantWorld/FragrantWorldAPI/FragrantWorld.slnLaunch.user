@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Новый профиль",
+    "Projects": [
+      {
+        "Path": "FragrantWorldAPI\\FragrantWorldAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "FragrantWorld\\FragrantWorld.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -1,0 +1,5 @@
+C:\Учёба\FragrantWorld\FragrantWorldAPI\FragrantWorld\obj\Debug\FragrantWorld.csproj.AssemblyReference.cache
+C:\Учёба\FragrantWorld\FragrantWorldAPI\FragrantWorld\obj\Debug\MainWindow.g.cs
+C:\Учёба\FragrantWorld\FragrantWorldAPI\FragrantWorld\obj\Debug\App.g.cs
+C:\Учёба\FragrantWorld\FragrantWorldAPI\FragrantWorld\obj\Debug\FragrantWorld_MarkupCompile.cache
+C:\Учёба\FragrantWorld\FragrantWorldAPI\FragrantWorld\obj\Debug\FragrantWorld_MarkupCompile.lref

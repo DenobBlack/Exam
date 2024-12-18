@@ -1,0 +1,6 @@
+@FragrantWorldAPI_HostAddress = http://localhost:5172
+
+GET {{FragrantWorldAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,60 @@
+﻿<Window x:Class="FragrantWorld.Windows.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FragrantWorld.Windows"
+        mc:Ignorable="d"
+        Style="{StaticResource AppWindowStyle}"
+        Title="Ваш заказ" Height="450" Width="800"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+    <StackPanel Background="LightGray">
+        <TextBlock Text="Информация о заказе:" FontWeight="Bold"/>
+        <TextBlock Name="OrderIdTextBlock" Text="{Binding StringFormat={}Номер заказа: {0}, Path=OrderId}"/>
+        <TextBlock Name="OrderCostTextBlock" />
+        <TextBlock Name="OrderDateTextBlock" Text="{Binding StringFormat={}Дата заказа: {0}, ConverterCulture=ru-ru, Path=OrderDate}"/>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Пункт выдачи:"/>
+            <ComboBox Name="PickupPointsComboBox" DisplayMemberPath="PickupPointAddress" 
+            SelectionChanged="PickupPointsComboBox_SelectionChanged"/>
+        </StackPanel>
+        <TextBlock Name="ReceiptCodeTextBlock" Text="{Binding StringFormat={}Код получения: {0}, Path=ReceiptCode}"
+       FontWeight="Bold" FontSize="14"/>
+            <Button Name="SaveTicketButton" Content="Выбрать файл и сохранить талон" Click="SaveTicketButton_Click"/>
+        </StackPanel>
+        <ScrollViewer Name="ProductsScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden"
+          VerticalAlignment="Stretch" Grid.Row="1">
+            <ListBox Name="ProductsListBox">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="5">
+                            <StackPanel Width="740">
+                                <TextBlock Text="{Binding ProductName}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding StringFormat={}Артикул: {0}, Path=ProductArticle}"/>
+                                <TextBlock Text="{Binding ProductDescription}"/>
+                                <TextBlock Text="{Binding StringFormat={}Производитель: {0}, Path=ProductManufacturer}"/>
+                                <TextBlock Text="{Binding StringFormat={}Цена: {0}, Path=ProductCost}"/>
+                                <TextBlock Text="{Binding StringFormat={}Скидка: {0}%, Path=ProductDiscountAmount}"/>
+                                <TextBlock Text="{Binding StringFormat={}Категория: {0}, Path=ProductCategory}"/>
+                                <TextBlock Text="{Binding StringFormat={}Статус: {0}, Path=ProductStatus}"/>
+                                <TextBlock Text="{Binding StringFormat={}Количество: {0}, Path=Amount}"/>
+                                <Button Name="DeleteButton" Content="Удалить" Width="70" HorizontalAlignment="Right" Click="DeleteButton_Click"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+    </Grid>
+</Window>
