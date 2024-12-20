@@ -25,7 +25,7 @@
 Пошаговая серия примеров для установки проекта:
 1. Скопируйте репозиторий с помощью команды:
 ```
-git clone https://github.com/khomut/FragrantWorldRepository.git
+git clone https://github.com/DenobBlack/Exam.git
 ```
 2. Настройка базы данных
     - Убедитесь, что у вас установлен SQL Server Management Studio и СУБД Microsoft SQL Server.
@@ -41,9 +41,9 @@ __ВАЖНО__
 4. Запустите проект, нажав кнопку "Start" или F5.
 
 __Пример работы приложения (Страница с товарами)__
-![Picture](https://github.com/khomut/FragrantWorldRepository/blob/main/FragrantWorld/Images/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B.png)
+![Picture](https://github.com/DenobBlack/Exam/blob/d317afb25c3c56cf61f0ba4b33646ebf58f72b71/FragrantWorld/Images/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B.png)
 
 ## Авторы
 
-* Хомутов Максим Андреевич - студент 3 курса группы ИСПП-21
 * Баранов Егор Алексеевич - студент 3 курса группы ИСПП-21
+  
