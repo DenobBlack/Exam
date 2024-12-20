@@ -43,6 +43,7 @@ __ВАЖНО__
 __Пример работы приложения (Страница с товарами)__
 ![Picture](https://github.com/DenobBlack/Exam/blob/35d0578f2a33091f9f352fa9bc89c8da7490f72b/FragrantWorld/_1.png)
 __Пример работы приложения (Окно авторизации)__
+
 ![Picture](https://github.com/DenobBlack/Exam/blob/35d0578f2a33091f9f352fa9bc89c8da7490f72b/FragrantWorld/_2.png)
 
 ## Авторы
