@@ -1,5 +1,6 @@
 ﻿using FragrantWorldAPI.Contexts;
 using FragrantWorldAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ namespace FragrantWorldAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrator, Manager")]
     public class OrderProductsController : ControllerBase
     {
         private readonly FragrantWorldDbContext _context;
@@ -17,12 +19,14 @@ namespace FragrantWorldAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<OrderProduct>>> GetOrderProducts()
         {
             return await _context.OrderProducts.ToListAsync();
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<OrderProduct>> GetOrderProduct(int id)
         {
             var orderProduct = await _context.OrderProducts.FindAsync(id);
@@ -36,6 +40,7 @@ namespace FragrantWorldAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> PutOrderProduct(int id, OrderProductDto orderProductDto)
         {
             if (id != orderProductDto.OrderId)
@@ -67,6 +72,7 @@ namespace FragrantWorldAPI.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<OrderProduct>> PostOrderProduct(OrderProductDto orderProductDto)
         {
             OrderProduct orderProduct = new()

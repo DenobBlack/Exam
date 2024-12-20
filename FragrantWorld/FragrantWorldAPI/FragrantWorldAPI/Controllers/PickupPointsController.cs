@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FragrantWorldAPI.Contexts;
 using FragrantWorldAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FragrantWorldAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class PickupPointsController : ControllerBase
     {
         private readonly FragrantWorldDbContext _context;
@@ -45,6 +47,7 @@ namespace FragrantWorldAPI.Controllers
         // PUT: api/PickupPoints/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator, Manager")]
         public async Task<IActionResult> PutPickupPoint(short id, PickupPoint pickupPoint)
         {
             if (id != pickupPoint.PickupPointId)
@@ -74,6 +77,7 @@ namespace FragrantWorldAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator, Manager")]
         public async Task<ActionResult<PickupPoint>> PostPickupPoint(PickupPoint pickupPoint)
         {
             _context.PickupPoints.Add(pickupPoint);
@@ -83,6 +87,7 @@ namespace FragrantWorldAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator, Manager")]
         public async Task<IActionResult> DeletePickupPoint(short id)
         {
             var pickupPoint = await _context.PickupPoints.FindAsync(id);

@@ -20,21 +20,23 @@ namespace FragrantWorld.Windows
         PickupPointService _pickupPointService = new();
         ProductService _productService = new();
         OrderService _orderService = new();
+        public User _currentUser;
         public double CostOrder { get; set; }
         public Order Order { get; set; }
         public List<Product> Products { get; set; }
         public List<OrderProduct> OrderProducts { get; set; }
-
-        public OrderWindow(Order order)
+        
+        public OrderWindow(Order order, User user)
         {
             InitializeComponent();
             Order = order;
             Random random = new();
             Order.OrderPickupCode = Convert.ToInt16(random.Next(100, 500));
             DataContext = this;
-            ReceiptCodeTextBlock.DataContext = order;
-            OrderDateTextBlock.DataContext = order;
-            OrderIdTextBlock.DataContext = order;
+            receiptCodeTextBlock.DataContext = order;
+            orderDateTextBlock.DataContext = order;
+            orderIdTextBlock.DataContext = order;
+            _currentUser = user;
         }
 
         private async Task UpdateOrderProductsAsync()
@@ -47,7 +49,7 @@ namespace FragrantWorld.Windows
                 Products.ForEach(async p => p.Amount = OrderProducts
                     .Where(op => op.ProductArticleNumber == p.ProductArticleNumber).FirstOrDefault().ProductAmount);
                 CostOrder = Products.Sum(p => (double)p.ProductCostWithDiscount * p.Amount);
-                OrderCostTextBlock.Text = string.Format("Итоговая стоимость: {0:f2} руб.", CostOrder);
+                orderCostTextBlock.Text = string.Format("Итоговая стоимость: {0:f2} руб.", CostOrder);
             }
             catch (HttpRequestException ex)
             {
@@ -58,8 +60,8 @@ namespace FragrantWorld.Windows
         private async Task UpdatePickupPointsAsync()
         {
             var pickupPoints = await _pickupPointService.GetPickupPointsAsync();
-            PickupPointsComboBox.ItemsSource = pickupPoints;
-            PickupPointsComboBox.SelectedIndex = pickupPoints.IndexOf(
+            pickupPointsComboBox.ItemsSource = pickupPoints;
+            pickupPointsComboBox.SelectedIndex = pickupPoints.IndexOf(
                 pickupPoints.Where(p => Order.OrderPickupPoint == p.PickupPointId)
                 .FirstOrDefault());
         }
@@ -104,12 +106,13 @@ namespace FragrantWorld.Windows
                     using (StreamWriter sw = File.CreateText(filePath))
                     {
                         sw.WriteLine(
-                            $"{OrderDateTextBlock.Text}\n" +
-                            $"{OrderIdTextBlock.Text}\n" +
-                            $"{OrderCostTextBlock.Text}\n" +
-                            $"Пункт выдачи: {((PickupPoint)PickupPointsComboBox.SelectedItem).PickupPointAddress}\n" +
+                            $"{orderDateTextBlock.Text}\n" +
+                            $"{orderIdTextBlock.Text}\n" +
+                            $"{orderCostTextBlock.Text}\n" +
+                            $"Пункт выдачи: {((PickupPoint)pickupPointsComboBox.SelectedItem).PickupPointAddress}\n" +
+                            $"Покупатель: {_currentUser.UserFullName}\n" +
                             $"Код получения: {Order.OrderPickupCode}\n" +
-                            $"{ReceiptCodeTextBlock.Text}\n" +
+                            $"{receiptCodeTextBlock.Text}\n" +
                             $"Состав заказа: {GetOrderList()}"
                             );
                     }
@@ -127,7 +130,7 @@ namespace FragrantWorld.Windows
         {
             try
             {
-                var pickupPoint = PickupPointsComboBox.SelectedItem as PickupPoint;
+                var pickupPoint = pickupPointsComboBox.SelectedItem as PickupPoint;
                 Order.OrderPickupPoint = pickupPoint.PickupPointId;
                 await _orderService.UpdateOrderAsync(Order);
             }

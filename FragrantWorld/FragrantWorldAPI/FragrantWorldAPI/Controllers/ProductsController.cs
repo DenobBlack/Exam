@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FragrantWorldAPI.Contexts;
 using FragrantWorldAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FragrantWorldAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrator, Manager")]
     public class ProductsController : ControllerBase
     {
         private readonly FragrantWorldDbContext _context;
@@ -22,12 +24,14 @@ namespace FragrantWorldAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
             return await _context.Products.ToListAsync();
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Product>> GetProduct(string id)
         {
             var product = await _context.Products.FindAsync(id);

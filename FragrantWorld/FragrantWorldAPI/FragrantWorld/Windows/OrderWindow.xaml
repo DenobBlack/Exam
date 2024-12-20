@@ -15,16 +15,16 @@
         </Grid.RowDefinitions>
     <StackPanel Background="LightGray">
         <TextBlock Text="Информация о заказе:" FontWeight="Bold"/>
-        <TextBlock Name="OrderIdTextBlock" Text="{Binding StringFormat={}Номер заказа: {0}, Path=OrderId}"/>
-        <TextBlock Name="OrderCostTextBlock" />
-        <TextBlock Name="OrderDateTextBlock" Text="{Binding StringFormat={}Дата заказа: {0}, ConverterCulture=ru-ru, Path=OrderDate}"/>
+        <TextBlock Name="orderIdTextBlock" Text="{Binding StringFormat={}Номер заказа: {0}, Path=OrderId}"/>
+        <TextBlock Name="orderCostTextBlock" />
+        <TextBlock Name="orderDateTextBlock" Text="{Binding StringFormat={}Дата заказа: {0}, ConverterCulture=ru-ru, Path=OrderDate}"/>
 
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Пункт выдачи:"/>
-            <ComboBox Name="PickupPointsComboBox" DisplayMemberPath="PickupPointAddress" 
+            <ComboBox Name="pickupPointsComboBox" DisplayMemberPath="PickupPointAddress" 
             SelectionChanged="PickupPointsComboBox_SelectionChanged"/>
         </StackPanel>
-        <TextBlock Name="ReceiptCodeTextBlock" Text="{Binding StringFormat={}Код получения: {0}, Path=ReceiptCode}"
+        <TextBlock Name="receiptCodeTextBlock" Text="{Binding StringFormat={}Код получения: {0}, Path=ReceiptCode}"
        FontWeight="Bold" FontSize="14"/>
             <Button Name="SaveTicketButton" Content="Выбрать файл и сохранить талон" Click="SaveTicketButton_Click"/>
         </StackPanel>

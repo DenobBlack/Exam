@@ -29,7 +29,7 @@ public partial class FragrantWorldDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("YOUR_REPOSITORY_STRING");
+        => optionsBuilder.UseSqlServer("Data Source=ISPP2114\\SQLEXPRESS;Initial Catalog=FragmentWorld;User Id=log;Password=123;Trusted_Connection=true;TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

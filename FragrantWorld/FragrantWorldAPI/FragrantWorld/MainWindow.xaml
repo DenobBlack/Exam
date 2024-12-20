@@ -11,13 +11,23 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Name="CountProductTextBlock" Margin="5"/>
-            <ComboBox Name="ManufacturerComboBox" SelectionChanged="ManufacturerComboBox_SelectionChanged"/>
-            <ComboBox Name="SortCostComboBox" Width="150" SelectionChanged="SortCostComboBox_SelectionChanged">
+        <StackPanel Grid.Row="0">
+            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Label x:Name="loginLabel" Content="Гость" Margin="0 0 20 0" HorizontalAlignment="Right"/>
+            <Button x:Name="authorizationButton" Content="Войти" Width="75" Click="AuthorizationButton_Click" HorizontalAlignment="Right"/>
+            <Button x:Name="logoutButton" Content="Выйти" Visibility="Collapsed" Click="LogoutButton_Click"/>
+            <Button x:Name="updateOrdersButton" Content="Изменить заказы" Visibility="Collapsed" Click="UpdateOrdersButton_Click"/>
+            </WrapPanel>
+            <Button Name="showOrderButton" Content="Просмотреть заказ" Click="ShowOrderButton_Click" Visibility="Collapsed"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Name="countProductTextBlock" Margin="5"/>
+            <ComboBox Name="manufacturerComboBox" SelectionChanged="ManufacturerComboBox_SelectionChanged"/>
+            <ComboBox Name="sortCostComboBox" Width="150" SelectionChanged="SortCostComboBox_SelectionChanged">
                 <ComboBoxItem Content="По возрастанию цены" />
                 <ComboBoxItem Content="По убыванию цены" />
             </ComboBox>
@@ -26,13 +36,13 @@
             <TextBlock Text="Макс. цена"/>
             <TextBox Name="MaxCostTextBox" Width="70" TextChanged="MaxCostTextBox_TextChanged"/>
             <Grid>
-                <TextBox Name="SearchProductTextBox" MinWidth="150" TextChanged="SearchProductTextBox_TextChanged"/>
+                <TextBox Name="searchProductTextBox" MinWidth="150" TextChanged="SearchProductTextBox_TextChanged"/>
                 <TextBlock Name="HintSearchTextBlock" Text="Поиск" IsHitTestVisible="False"/>
             </Grid>
         </StackPanel>
         <ScrollViewer Name="ProductsScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden"
-            HorizontalAlignment="Stretch" Grid.Row="1">
-            <ListBox Name="ProductsListBox">
+            HorizontalAlignment="Stretch" Grid.Row="2">
+            <ListBox Name="productsListBox">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -55,7 +65,5 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
-        <Button Name="ShowOrderButton" Content="Просмотреть заказ" Click="ShowOrderButton_Click" 
-            Visibility="Collapsed" Grid.Row="2" Height="50"/>
     </Grid>
 </Window>
